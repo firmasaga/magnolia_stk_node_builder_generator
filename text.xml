@@ -1,0 +1,26 @@
+<sv:node sv:name="stkCategoryOverview">
+
+
+    <sv:property sv:name="description" sv:type="String">
+        <sv:value/>
+    </sv:property>
+    <sv:property sv:name="dialog" sv:type="String">
+        <sv:value>stkCategoryOverview</sv:value>
+    </sv:property>
+    <sv:property sv:name="i18nBasename" sv:type="String">
+        <sv:value>info.magnolia.module.categorization.messages</sv:value>
+    </sv:property>
+    <sv:property sv:name="modelClass" sv:type="String">
+        <sv:value>info.magnolia.module.categorization.model.CategoryOverviewModel</sv:value>
+    </sv:property>
+    <sv:property sv:name="templatePath" sv:type="String">
+        <sv:value>/categorization/paragraphs/categoryOverview.ftl</sv:value>
+    </sv:property>
+    <sv:property sv:name="title" sv:type="String">
+        <sv:value>paragraphs.features.stkCategoryOverview.title</sv:value>
+    </sv:property>
+    <sv:property sv:name="type" sv:type="String">
+        <sv:value>stk</sv:value>
+    </sv:property>
+
+</sv:node>
