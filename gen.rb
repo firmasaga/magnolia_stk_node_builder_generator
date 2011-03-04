@@ -1,8 +1,9 @@
 require "lib/writer"
 require "nokogiri"
 
-if ARGV.length != 3
-  print "usage:  ruby gen.rb bootStrapFile projectPrefix packageName\n"
+if ARGV.length != 4
+  puts ARGV.inspect
+  puts "usage:  ruby gen.rb bootStrapFile projectPrefix packageName outputDir\n"
   exit
 end
 

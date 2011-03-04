@@ -30,8 +30,9 @@ class BaseWriter
       temp_out = ""
       sub_node.each do |sub_sub_node|
         name = sub_sub_node.attr("name").to_s.gsub("stk", @project_prefix)
-        value = sub_sub_node.xpath("sv:value").text.to_s.gsub("stk", @project_prefix)
-        temp_out += "addNode(\"#{name}\", \"#{value}\").then(
+        #TODO: make dynamic type
+        value = "ItemType.CONTENTNODE" #sub_sub_node.xpath("sv:value").text.to_s.gsub("stk", @project_prefix)
+        temp_out += "addNode(\"#{name}\", #{value}).then(
                             #{process_nodes(sub_sub_node, out)}
                     ),\n"
       end

@@ -14,13 +14,16 @@ class ParagraphsWriter < BaseWriter
 
 
   def write_paragraph_task_class(node)
-    name = node["name"].gsub("stk", @project_prefix)
+    name = node["name"].gsub("stk", "")
+    name_with_prefix = @project_prefix + name
+    class_name = "#{upfirst(name)}Task"
     class_str = "package #{@package_name}.paragraphs.definitions;
 
               import com.baloise.cms.internet.setup.tasks.paragraphs.AbstractParagraphConfigBuilderTask;
               import info.magnolia.nodebuilder.NodeOperation;
               import info.magnolia.nodebuilder.task.ErrorHandling;
 
+              import static info.magnolia.nodebuilder.Ops.addNode;
               import static info.magnolia.nodebuilder.Ops.addProperty;
 
               /**
@@ -29,10 +32,10 @@ class ParagraphsWriter < BaseWriter
                * Date: #{Time.now.strftime("%d/%m/%Y")}
                * Time: #{Time.now.strftime("%I:%M%p")}
                */
-              public class #{upfirst(name)}Task extends AbstractParagraphConfigBuilderTask {
-                  private final static String PARAGRAPH_KEY = \"#{name}\";
+              public class #{class_name} extends AbstractParagraphConfigBuilderTask {
+                  private final static String PARAGRAPH_KEY = \"#{name_with_prefix}\";
 
-                  public TextImageTask() {
+                  public #{class_name}() {
                       super(PARAGRAPH_KEY, ErrorHandling.strict);
                   }
 
@@ -45,14 +48,15 @@ class ParagraphsWriter < BaseWriter
                   }
               }"
 
-    paragraphs_dir = @output_dir + "/paragraphs/"
+    paragraphs_dir = @output_dir + "/paragraphs"
     Dir.mkdir(paragraphs_dir) unless File.directory?(paragraphs_dir)
+    definitions_dir = paragraphs_dir + "/definitions"
+    Dir.mkdir(definitions_dir) unless File.directory?(definitions_dir)
 
-    fileName = @output_dir + "/paragraphs/" + upfirst(name.gsub(@project_prefix, "")) + "Task.java"
-    f = File.new(fileName, "w");
-
-    f.print class_str
-    f.close()
+    fileName = definitions_dir + "/" + name + "Task.java"
+    File.open(fileName, "w") do |f|
+      f.print class_str
+    end
   end
 
 end
