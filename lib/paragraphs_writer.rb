@@ -15,11 +15,12 @@ class ParagraphsWriter < BaseWriter
 
   def write_paragraph_task_class(node)
     name = node["name"].gsub("stk", "")
-    name_with_prefix = @project_prefix + name
+    name_with_prefix = @project_prefix + upfirst(name)
     class_name = "#{upfirst(name)}Task"
     class_str = "package #{@package_name}.paragraphs.definitions;
 
               import com.baloise.cms.internet.setup.tasks.paragraphs.AbstractParagraphConfigBuilderTask;
+              import info.magnolia.cms.core.ItemType;
               import info.magnolia.nodebuilder.NodeOperation;
               import info.magnolia.nodebuilder.task.ErrorHandling;
 
@@ -53,7 +54,7 @@ class ParagraphsWriter < BaseWriter
     definitions_dir = paragraphs_dir + "/definitions"
     Dir.mkdir(definitions_dir) unless File.directory?(definitions_dir)
 
-    fileName = definitions_dir + "/" + name + "Task.java"
+    fileName = definitions_dir + "/" + class_name + ".java"
     File.open(fileName, "w") do |f|
       f.print class_str
     end

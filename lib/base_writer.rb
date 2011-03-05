@@ -4,6 +4,7 @@ class BaseWriter
     @project_prefix = project_prefix
     @package_name = package_name
     @output_dir = output_dir
+    @level = 0
   end
 
 
@@ -26,9 +27,12 @@ class BaseWriter
 
   def process_nodes(node, out = "")
     sub_node = node.xpath("sv:node")
+    temp_out = ""
+
     if sub_node.size > 0
-      temp_out = ""
+
       sub_node.each do |sub_sub_node|
+        @level += 1
         name = sub_sub_node.attr("name").to_s.gsub("stk", @project_prefix)
         #TODO: make dynamic type
         value = "ItemType.CONTENTNODE" #sub_sub_node.xpath("sv:value").text.to_s.gsub("stk", @project_prefix)
@@ -36,16 +40,25 @@ class BaseWriter
                             #{process_nodes(sub_sub_node, out)}
                     ),\n"
       end
-      temp_out
+      temp_out = @level > 0 ? temp_out[0..temp_out.size-3] : temp_out[0..temp_out.size-2]
+      @level -= 1 if @level > 0
+      node.xpath("sv:property").each do |p|
+        name = p.attr("name").to_s.gsub("stk", @project_prefix)
+        value = p.xpath("sv:value").text.to_s.gsub("stk", @project_prefix)
+        out += "addProperty(\"#{name}\", \"#{value}\"),\n"
+      end
+      out = out[0..out.size-3]
+      out += temp_out
     else
       node.xpath("sv:property").each do |p|
         name = p.attr("name").to_s.gsub("stk", @project_prefix)
         value = p.xpath("sv:value").text.to_s.gsub("stk", @project_prefix)
         out += "addProperty(\"#{name}\", \"#{value}\"),\n"
       end
-      out
+
+      out =  out[0..out.size-3]
+      @level -= 1 if @level > 0
+      out += temp_out 
     end
-
-
   end
 end

@@ -1,5 +1,5 @@
 class DialogsWriter < BaseWriter
-   def initialize
+  def initialize
 
-   end
+  end
 end

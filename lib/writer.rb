@@ -1,4 +1,6 @@
 require "lib/paragraphs_writer"
+require "lib/templates_writer"
+require "lib/dialogs_writer"
 class Writer
   def initialize(project_prefix, package_name, output_dir)
     @project_prefix = project_prefix
@@ -20,6 +22,9 @@ class Writer
 
     paragraphs_writer = ParagraphsWriter.new(cleaned_doc, @project_prefix, @package_name, @output_dir)
     paragraphs_writer.write
+
+    templates_writer = TemplatesWriter.new(cleaned_doc, @project_prefix, @package_name, @output_dir)
+    templates_writer.write
   end
 
   def remove_unnecessary_nodes
