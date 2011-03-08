@@ -1,0 +1,11 @@
+Description:
+    This generator Generates NodeBuilder Java Classes from Bootstraped Stk.
+    Supports templates, paragraphs and dialogs
+
+Example:
+    rails generate node_builder myPrefix com.my config.modules.standard-templating-kit.xml tmp
+
+     This will create:
+        what/will/it/create
+
+

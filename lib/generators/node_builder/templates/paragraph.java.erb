@@ -1,0 +1,36 @@
+<%= "package #{@package_name}.paragraphs.definitions;" %>
+
+<%= "import com.baloise.cms.internet.setup.tasks.paragraphs.AbstractParagraphConfigBuilderTask;" %>
+<%= "import info.magnolia.cms.core.ItemType;" %>
+<%= "import info.magnolia.nodebuilder.NodeOperation;" %>
+<%= "import info.magnolia.nodebuilder.task.ErrorHandling;" %>
+
+<%= "import static info.magnolia.nodebuilder.Ops.addNode;" %>
+<%= "import static info.magnolia.nodebuilder.Ops.addProperty;" %>
+
+<%= "/**" %>
+<%= " * Created by Ruby Node Buildergenerator" %>
+<%= " * User: dschlegel, Namics AG" %>
+<%= " * Date: #{Time.now.strftime("%d/%m/%Y")}" %>
+<%= " * Time: #{Time.now.strftime("%I:%M%p")}" %>
+<%= " */" %>
+
+<%= "public class #{@class_name} extends AbstractParagraphConfigBuilderTask{" %>
+<%= "   private final static String PARAGRAPH_KEY= \"#{@paragraph_name}\";" %>
+
+<%= "   public #{@class_name}(){" %>
+<%= "      super(PARAGRAPH_KEY,ErrorHandling.strict);" %>
+<%= "   }" %>
+
+<%= "   @Override" %>
+<%= "   protected ParagraphStorageNodeName getParagraphStorageNodeName() {" %>
+<%= "      return ParagraphStorageNodeName.EMPTY;" %>
+<%= "   }" %>
+
+<%= "   @Override" %>
+<%= "   protected NodeOperation[] getNodeOperations(){" %>
+<%= "      return new NodeOperation[]{" %>
+<%= "          #{node_operations(@node)}" %>
+<%= "      };" %>
+<%= "   }" %>
+<%= "}" %>

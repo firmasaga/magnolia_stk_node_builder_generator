@@ -1,0 +1,36 @@
+<%= "package #{@package_name}.dialogs.definitions;" %>
+
+<%= "import com.baloise.cms.internet.setup.tasks.dialogs.AbstractDialogConfigBuilderTask;" %>
+<%= "import info.magnolia.cms.core.ItemType;" %>
+<%= "import info.magnolia.nodebuilder.NodeOperation;" %>
+<%= "import info.magnolia.nodebuilder.task.ErrorHandling;" %>
+
+<%= "import static info.magnolia.nodebuilder.Ops.addNode;" %>
+<%= "import static info.magnolia.nodebuilder.Ops.addProperty;" %>
+
+<%= "/**" %>
+<%= " * Created by Ruby Node Buildergenerator" %>
+<%= " * User: dschlegel, Namics AG" %>
+<%= " * Date: #{Time.now.strftime("%d/%m/%Y")}" %>
+<%= " * Time: #{Time.now.strftime("%I:%M%p")}" %>
+<%= " */" %>
+
+<%= "public class #{@class_name} extends AbstractDialogConfigBuilderTask{" %>
+<%= "   private final static String DIALOG_KEY= \"#{@dialog_name}\";" %>
+
+<%= "   public #{@class_name}(){" %>
+<%= "      super(DIALOG_KEY,ErrorHandling.strict);" %>
+<%= "   }" %>
+
+<%= "   @Override" %>
+<%= "   protected DialogStorageNodeName getDialogStorageNodeName() {" %>
+<%= "      return DialogStorageNodeName.EMPTY;" %>
+<%= "   }" %>
+
+<%= "   @Override" %>
+<%= "   protected NodeOperation[] getNodeOperations(){" %>
+<%= "      return new NodeOperation[]{" %>
+<%= "          #{node_operations(@node)}" %>
+<%= "      };" %>
+<%= "   }" %>
+<%= "}" %>

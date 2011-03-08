@@ -1,2 +1,5 @@
+tmp/
+.bundle
+log/
 work/
 .idea
