@@ -31,7 +31,7 @@ class NodeBuilderGenerator < Rails::Generators::Base
     doc.search("/sv:node/sv:node[@sv:name='#{folder}']/sv:node/sv:node").each do |node|
       name = node["name"].gsub("stk", "")
       @paragraph_name = "#{project_prefix + upfirst(name)}"
-      @class_name = "#{upfirst(name)}Task"
+      @class_name = "#{upfirst(name)}"
       @node = node
 
       paragraphs_dir = output_dir + "/paragraphs/definitions"
@@ -46,16 +46,16 @@ class NodeBuilderGenerator < Rails::Generators::Base
   end
 
   def write_dialogs(doc, folder)
-    doc.search("/sv:node/sv:node[@sv:name='#{folder}']/sv:node/sv:node").each do |node|
+    doc.search("/sv:node/sv:node[@sv:name='#{folder}']/sv:node/sv:node/sv:node").each do |node|
       name = node["name"].gsub("stk", "")
       @dialog_name = "#{project_prefix + upfirst(name)}"
-      @class_name = "#{upfirst(name)}Task"
+      @class_name = "#{upfirst(name)}"
       @node = node
 
-      dialogs_dir = output_dir + "/dialoghs/definitions"
+      dialogs_dir = output_dir + "/dialogs/definitions"
       FileUtils.mkdir_p(dialogs_dir) unless File.directory?(dialogs_dir)
 
-      template "paragraph.java.erb", "#{dialogs_dir}/#{@class_name}.java"
+      template "dialog.java.erb", "#{dialogs_dir}/#{@class_name}.java"
     end
   end
 

@@ -19,8 +19,7 @@ Todo::Application.routes.draw do |map|
   #       get :short
   #       post :toggle
   #     end
-  #
-  #     collection do
+  #   #     collection do
   #       get :sold
   #     end
   #   end
