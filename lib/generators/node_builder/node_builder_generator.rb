@@ -14,9 +14,7 @@ class NodeBuilderGenerator < Rails::Generators::Base
 
     folders = ["templates", "paragraphs", "dialogs"]
     temp_file_name = "tmp.config.modules.standard-templating-kit.xml"
-
     doc = remove_unnecessary_nodes(temp_file_name)
-
     folders.each do |f|
       puts "processing #{f}"
       eval "write_#{f}(doc, '#{f}')"
@@ -125,9 +123,7 @@ class NodeBuilderGenerator < Rails::Generators::Base
         first_node = false
       end
       temp_out += str
-
     end
-
     out += temp_out
   end
 
